@@ -14,9 +14,9 @@ For this fictional problem, we ask you to write a package indexer.
 
 Packages are software artifacts that can be installed in a system, often via a package manager such as apt, rpm, or Homebrew. Packages offer some new feature to a system. These days so many packages have libraries in common, so a package will often require other packages to be installed before you can install it in your system.
 
-The system you are going to write will be responsible for collecting metadata on what ackages are installed in a system and accept or reject new installations or uninstallations depending if dependencies are fulfilled.
+The system you are going to write will be responsible for collecting metadata on what packages are installed in a system and accept or reject new installations or uninstallations depending if dependencies are fulfilled.
 
-It will be a socket server, listening for TCP connections on port 8080. Many clientes can connect to this port at the same time, and once they do connect they may send a message following this structure:
+It will be a socket server, listening for TCP connections on port 8080. Many clients can connect to this port at the same time, and once they do connect they may send a message following this structure:
 
 ```
 <command>|<package>|<dependencies>\n
@@ -36,10 +36,10 @@ UNINSTALL|cloog|\n
 QUERY|cloog|\n
 ```
 
-Once the message was sent, the client will wait for the server to return a response code `1\n` or `0\n`.
+Once the message is sent, the client will wait for the server to return a response code `1\n` or `0\n`.
 
 The `<command>`s are as follows:
-* `INSTALL` means that the given package should be marked as installed. The server must return `1\n` if the package was installed or `0\n` if the package *could ot be installed because of a missing dependency that needs to be installed first*.
+* `INSTALL` means that the given package should be marked as installed. The server must return `1\n` if the package was installed or `0\n` if the package *could not be installed because of a missing dependency that needs to be installed first*.
 * `UNINSTALL` means that the given package should be removed. The server must return `1\n` if the package was uninstalled or `0\n` if the package *could not be uninstalled because some other package depends on it*.
 * `QUERY` means that the client wants to know if a given package is currently installed. The server should return `1\n` if the package is currently installed or `0\n` if it isn't.
 
@@ -55,7 +55,7 @@ Together with this instructions file you should have received an executable file
 $ ./package-tree-test
 ```
 
-The tool will first tests for correctness, then try a robustness test. Both should pass before you submit your solution to the challenge, and once they both pass you will see a message like this:
+The tool will first run tests for correctness, then try a robustness test. Both should pass before you submit your solution to the challenge, and once they both pass you will see a message like this:
 ```
 ================
 All tests passed!
